@@ -13,10 +13,27 @@ This is a tag for sending NON offline conversions from your website back to Bing
 Even though I have tested it, have in mind that this tag was created using information gathered from outdated sources and also from my own experince. It may not behave correctly for your use case or Bing may change something after its release, so, be sure to test it before going full throttle with your campaigns. 
 
 ### How to use it?
+Page Load Event
 1. Search for this tag inside the Communit Template Gallery in your Google Tag Manager
 2. Install it
-3. Create a tag
-4. Set the parameters. You can leave the non-required parameters as it is, they will default to the information from the event data, or you can set them manually, if you do, they will ignore the default event data.
+3. Inside Microsoft Ads, create a UET Tag if you don't already have one
+4. Create your tag using the template, with Event Type Page Load
+5. Fill in the fields. You can leave the non-required parameters as they are, they will default to the information from the event data, or you can set them manually, if you do, they will ignore the default event data.
+6. Add the trigger for the page_view event
+7. Save and test
+
+Custom Event Type
+1. Inside Microsoft Ads, create a Conversion Goal
+2. Type of conversion: Website
+3. Choose your Goal Category
+4. Type of Interaction: Event
+5. Fill the information about Goal Settings
+6. Choose: I don't want to use enhanced conversions (this feature will be added soon)
+7. This part is about the UET tag, choose what fits you
+8. Once you reach the "Install Event Tag" part, choose: Manual Installation
+9. Here you can set the Event Action, Category, Label and Event that you will later use in your tag
+10. Create your tag using the template, with Event Type Custom
+10. Fill in the fields. You can leave the non-required parameters as they are, they will default to the information from the event data, or you can set them manually, if you do, they will ignore the default event data.
 
 One consideration: the tag may not be able to read or create the _uetmsclkid cookie from the page if a custom domain is not set the for tracking server. In that case you can pass the parameters manually.
 
@@ -39,11 +56,11 @@ One consideration: the tag may not be able to read or create the _uetmsclkid coo
 |Event Action|No|Action associated with the event as defined by the advertiser. This is required if the advertiser is utilizing custom events for conversion tracking or remarketing. This field cannot be used in conjunction with a page load event.|add_to_cart|event_action||
 |Event Value|No|Value assigned to the event as defined by the advertiser. This is required if the advertiser is utilizing custom events for conversion tracking or remarketing. This field cannot be used in conjunction with a page load event.|20|event_value||
 |pagetype|No|Represents one of the following page types: Cart, Category, Home, Other, Product, Purchase, Search results. In this context, "Cart" refers to the shopping cart page, and "Purchase" refers to the confirmation page.|Purchase|||
-|Product IDs|No|Records a comma-separated list of product IDs that the user has viewed. This parameter supports multiple product IDs when the page displays more than one product. Each product ID is unique to the item on the page and must correspond to either the ID or item_group_id attribute in the product feed submitted through.|pid1,pid2,pid3,pid4,pid5,pid6,pid7,pid8,pid9,pid10|Items IDs from Google Analytics standard ecommerce data layer||
+|Product IDs|No|Records a comma-separated list of product IDs that the user has viewed. This parameter supports multiple product IDs when the page displays more than one product. Each product ID is unique to the item on the page and must correspond to either the ID or item_group_id attribute in the product feed submitted through.|pid1,pid2,pid3,pid4,pid5,pid6,pid7,pid8,pid9,pid10|items||
 |Search Term|No|Search query used by the user before landing on the search results page.|tennis%20balls|search_term||
 |Ecommerce Category|No|Category ID for the category browse page.|catABC|||
-|Transaction ID|No|An ID that uniquely identifies each transaction.||transaction_id from Google Analytics standard ecommerce data layer||
-|Ecommerce Items|No|An array that includes details of products, such as product ID and price. This array should be captured on pages and events involving multiple products, such as an add-to-cart event, visiting the cart page, or visiting the purchase confirmation page.|id%3DprodABCD%26quantity%3D2%26price%3D53.4%2Cid%3DprodABC%26quantity%3D1%26price%3D121.1||
+|Transaction ID|No|An ID that uniquely identifies each transaction.||transaction_id||
+|Ecommerce Items|No|An array that includes details of products, such as product ID and price. This array should be captured on pages and events involving multiple products, such as an add-to-cart event, visiting the cart page, or visiting the purchase confirmation page.|id=prodABCD&quantity=2&price=53.4,id=prodABC&quantity=1&price=121.1||
 |Value|No|Used for conversion tracking to report varying revenue amounts.|24.3|value||
 |Currencty|No|Records the currency in which revenue is reported.|usd|currency||
 
