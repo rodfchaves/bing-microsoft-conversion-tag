@@ -13,10 +13,10 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
+  "displayName": "Bing/Microsoft Ads Conversions (Events)",
   "categories": [
     "ADVERTISING", "CONVERSIONS", "ANALYTICS", "REMARKETING"
   ],
-  "displayName": "Bing/Microsoft Ads Conversions (Events)",
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -726,21 +726,7 @@ ___SERVER_PERMISSIONS___
 
 ___TESTS___
 
-scenarios:
-- name: Test 1
-  code: "// Call runCode to run the template's code with a lowercase string\nlet variableResult\
-    \ = runCode({\n  first_click: false,\n  activate_logs: true,\n  ti: \"test\",\n\
-    \  user_id: 'user id',\n  evt: 'pageLoad',\n  page_location: 'https://mypage.com.br/registration?msclkid=292049a17e2413e3a4081719e839afe6',\n\
-    \  page_refferer: 'https://bing.com',\n  page_tile: 'My Page',\n  pagetype: 'Home',\n\
-    \  prodid: undefined,\n  kw: 'pagekewyord, word3',\n  search_term: 'wall%20clocks',\n\
-    \  transaction_id: 'sdj32jhDH32',\n  lg: 'pt-BR',\n  sw: '1080',\n  sh: '720',\n\
-    \  sc: undefined,\n  pi: undefined,\n  spa: true,\n  msclkid_query: 'query_test',\n\
-    \  msclkid_cookie: undefined,  \n  sid: 'session id',\n  vid: 'anonymous id',\n\
-    \  page_path: '/checkout',\n  items_ga: true,\n  prodid_ga: true,\n  items: \"\
-    \",\n  gc: 'usd',\n  gv: 23.33,\n  ec: 'product',\n  ea: 'purchase',\n  el: 'product\
-    \ 1',\n  ev: '23'                   \n                             });\n// Validate\
-    \ that the result of runCode is an uppercase string.\nassertThat(variableResult).isEqualTo('THIS\
-    \ IS A TEST');"
+scenarios: []
 
 
 ___NOTES___
