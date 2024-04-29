@@ -2,7 +2,7 @@ First thing:
 # I AM NOT RESPONSIBLE FOR WHAT HAPPENS TO YOUR CAMPAIGNS WHEN USING THIS TAG, CHECK THE LICENSE FILE!
 
 ### What is this about?
-This is a tag for sending conversions from your website back to Bing/Microsoft Ads system, using Google Tag Manager Server-side.
+This is a tag for sending NON offline conversions from your website back to Bing/Microsoft Ads system, using Google Tag Manager Server-side.
 
 ### Why should I use it?
 - If you want to get rid of the UET tag in your website to boost page speed.
