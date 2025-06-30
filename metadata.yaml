@@ -1,5 +1,11 @@
 homepage: "https://www.rodrigochaves.com.br"
 documentation: "https://github.com/rodfchaves/bing-microsoft-conversion-tag"
 versions:
+  # Latest version
+  - sha: a1640037f2939ca4ca7243f24430e13455b5625e
+    changeNotes: |2
+      - Changed the timeout to 2000 
+      - Added the Consent State for the Consent Parameter Compliance
+  #Older versions
   - sha: 49d915706140959e6d8dd002e05dac1af147e143
     changeNotes: Initial Version
