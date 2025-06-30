@@ -65,7 +65,17 @@ One consideration: the tag may not be able to read or create the _uetmsclkid coo
 |Currencty|No|Records the currency in which revenue is reported.|usd|currency||
 
 
+### About the Consent Parameter Compliance
+There is a field called "Consent State" if no value is set, it fetches the value from the ad_storage value when it exists and defaults to
+"granted" if there is no value set for ad_storage.
+
+Accepted values: granted or denied.
+
+Still in beta, be aware that it may not work as expected.
+
 
 #### References:
 https://help.ads.microsoft.com/#apex/ads/en/60123/-1    
 https://help.ads.microsoft.com/apex/index/3/en/60122
+https://help.ads.microsoft.com/#apex/ads/en/60119/1-500
+https://help.ads.microsoft.com/#apex/ads/en/60339/1

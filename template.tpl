@@ -307,6 +307,14 @@ ___TEMPLATE_PARAMETERS___
     "canBeEmptyString": true
   },
   {
+    "type": "TEXT",
+    "name": "asc",
+    "displayName": "Consent State",
+    "simpleValueType": true,
+    "help": "For the Consent Parameter Compliance, if no value is set, it fetches the value from the ad_storage value when it exists and defaults to granted if there is no value set for ad_storage.  Accepted values: granted or denied.  Still in beta.",
+    "canBeEmptyString": true
+  },
+  {
     "type": "CHECKBOX",
     "name": "spa",
     "checkboxText": "Single-page application",
@@ -505,6 +513,8 @@ params.ec = isNotEmpty(data.ec) || getEventData('event_category');
 params.ea = isNotEmpty(data.ea) || getEventData('event_action');
 params.el = isNotEmpty(data.el) || getEventData('event_label');
 params.ev = isNotEmpty(data.ev) || getEventData('event_value');
+params.asc = isNotEmpty(data.asc) || getEventData('ad_storage') || "granted";
+
 
 if (data.activateLogs) {
   logToConsole("Params: " + JSON.stringify(params));  
@@ -529,7 +539,7 @@ if (data.activateLogs) {
 
 return sendHttpGet(url, {
   headers: {key: 'value'},
-  timeout: 500,
+  timeout: 2000,
 }).then((result) => {
   if (result.statusCode >= 200 && result.statusCode < 300) {
     logToConsole('Result: ' + data.gtmOnSuccess());
