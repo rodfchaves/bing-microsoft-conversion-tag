@@ -383,7 +383,7 @@ function setUETCookie(clickid) {
     }
 }
 
-if(data.first_click) {
+if(data.firstClick) {
   if (isNotEmpty(data.msclkidCookie) || isNotEmpty(getCookieValues('_uetmsclkid'))) {
     let clickid_cookie = getCookieValues('_uetmsclkid')[0];
     clickid = (isNotEmpty(data.msclkidCookie) || (clickid_cookie.substring(4)));
