@@ -443,7 +443,7 @@ let items = () => {
   if (data.itemsGa) {
     if(items_data) {
       items_data.forEach(function(item, i) {
-        result += "id=" + item.item_id + 'quantity=' + item.quantity + 'price=' + item.price;
+        result += "id=" + item.item_id + '&quantity=' + item.quantity + '&price=' + item.price;
         if (i < items_data.length - 1) {
           result += ',';
         }
