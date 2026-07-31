@@ -66,10 +66,17 @@ One consideration: the tag may not be able to read or create the _uetmsclkid coo
 
 
 ### About the Consent Parameter Compliance
-There is a field called "Consent State" if no value is set, it fetches the value from the ad_storage value when it exists and defaults to
-"granted" if there is no value set for ad_storage.
+There is a field called "Consent State", which sets the `asc` parameter.
 
-Accepted values: granted or denied.
+Microsoft expects `G` (granted) or `D` (denied) on the wire. `granted` and `denied` are also accepted and are normalized to `G` / `D` before sending, so existing configurations keep working.
+
+If the field is left empty, the tag resolves the consent state in this order:
+
+1. `ad_storage` from the incoming event data
+2. the Google Consent Mode signal that the GA4 client passes through as `x-ga-gcs`
+3. `D` (denied)
+
+Defaulting to denied means that an unknown consent state produces a cookieless ping for modelling, rather than asserting a consent the visitor may never have given.
 
 Still in beta, be aware that it may not work as expected.
 

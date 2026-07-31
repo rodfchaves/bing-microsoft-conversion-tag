@@ -311,7 +311,7 @@ ___TEMPLATE_PARAMETERS___
     "name": "asc",
     "displayName": "Consent State",
     "simpleValueType": true,
-    "help": "For the Consent Parameter Compliance, if no value is set, it fetches the value from the ad_storage value when it exists and defaults to granted if there is no value set for ad_storage.  Accepted values: granted or denied.  Still in beta.",
+    "help": "Consent state for the Microsoft asc parameter.  Accepted values: G or granted, D or denied - granted and denied are normalized to G and D, which is what Microsoft expects on the wire.  If left empty, the tag falls back in order to: ad_storage from the event data, then the Google Consent Mode signal (x-ga-gcs) supplied by the GA4 client, then D (denied).",
     "canBeEmptyString": true
   },
   {
@@ -362,6 +362,48 @@ function isNotEmpty(obj) {
   } else {
     return obj;
   }
+}
+
+// Microsoft expects the consent state on the wire as "G" (granted) or "D" (denied).
+// "granted" and "denied" are still accepted here, for backwards compatibility with
+// existing tag configurations, and normalized to G/D before being sent.
+function normalizeConsent(value) {
+  if (value === 'G' || value === 'granted') {
+    return 'G';
+  }
+  if (value === 'D' || value === 'denied') {
+    return 'D';
+  }
+  return false;
+}
+
+// Resolution order: the tag's Consent State field, then ad_storage in the incoming
+// event data, then the Google Consent Mode signal the GA4 client passes through as
+// x-ga-gcs, and finally "D". Defaulting to denied rather than granted means an
+// unknown consent state produces a cookieless ping for modelling instead of
+// asserting a consent the visitor may never have given.
+function consentState() {
+  const fromField = normalizeConsent(isNotEmpty(data.asc));
+  if (fromField) {
+    return fromField;
+  }
+
+  const fromEventData = normalizeConsent(getEventData('ad_storage'));
+  if (fromEventData) {
+    return fromEventData;
+  }
+
+  // gcs is formatted "G1XY", where X is ad_storage and Y is analytics_storage,
+  // each 1 for granted and 0 for denied.
+  const gcs = getEventData('x-ga-gcs');
+  if (isNotEmpty(gcs) && gcs.length >= 3) {
+    if (gcs.substring(2, 3) === '1') {
+      return 'G';
+    }
+    return 'D';
+  }
+
+  return 'D';
 }
 
 let msquery = () => {
@@ -513,7 +555,7 @@ params.ec = isNotEmpty(data.ec) || getEventData('event_category');
 params.ea = isNotEmpty(data.ea) || getEventData('event_action');
 params.el = isNotEmpty(data.el) || getEventData('event_label');
 params.ev = isNotEmpty(data.ev) || getEventData('event_value');
-params.asc = isNotEmpty(data.asc) || getEventData('ad_storage') || "granted";
+params.asc = consentState();
 
 
 if (data.activateLogs) {
